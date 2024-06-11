@@ -1,31 +1,47 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_colors.dart';
+import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
-import '../../../../core/widgets/textfields/txt_field.dart';
+import '../../../../core/widgets/textfields/time_field.dart';
+import '../../models/plan_model.dart';
 
-class AddNamePage extends StatefulWidget {
-  const AddNamePage({super.key});
+class AddTimePage extends StatefulWidget {
+  const AddTimePage({super.key, required this.name});
+
+  final String name;
 
   @override
-  State<AddNamePage> createState() => _AddNamePageState();
+  State<AddTimePage> createState() => _AddTimePageState();
 }
 
-class _AddNamePageState extends State<AddNamePage> {
+class _AddTimePageState extends State<AddTimePage> {
   final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
 
   void onNext() {
-    context.push('/add-time', extra: controller1.text);
+    context.push(
+      '/add-plan',
+      extra: PlanModel(
+        id: getCurrentTimestamp(),
+        name: widget.name,
+        departureTime: controller1.text,
+        arrivalTime: controller2.text,
+        from: '',
+        to: '',
+        date: '',
+        passenger: '',
+        price: 0,
+      ),
+    );
   }
 
   @override
   void dispose() {
-    log('DISPOSE ADD NAME PAGE');
     controller1.dispose();
+    controller2.dispose();
     super.dispose();
   }
 
@@ -35,7 +51,7 @@ class _AddNamePageState extends State<AddNamePage> {
       body: Column(
         children: [
           CustomAppBar(
-            title: 'Create card',
+            title: 'Time',
             onPressed: () {
               context.pop();
             },
@@ -45,34 +61,23 @@ class _AddNamePageState extends State<AddNamePage> {
             child: Column(
               children: [
                 Container(
-                  height: 126,
+                  height: 144,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     color: AppColors.grey8,
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Name',
-                        style: TextStyle(
-                          color: AppColors.grey40,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      TimeField(
+                        controller: controller1,
+                        onTap: () {},
                       ),
                       const Spacer(),
-                      const Text(
-                        'Make a name',
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      TimeField(
+                        controller: controller2,
+                        onTap: () {},
                       ),
-                      const SizedBox(height: 8),
-                      TxtField(controller: controller1)
                     ],
                   ),
                 ),

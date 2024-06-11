@@ -13,6 +13,6 @@ final theme = ThemeData(
     selectionHandleColor: AppColors.blue,
   ),
   colorScheme: ColorScheme.fromSwatch(
-    accentColor: AppColors.grey,
+    accentColor: AppColors.grey8,
   ),
 );

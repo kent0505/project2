@@ -7,7 +7,7 @@ class PlanModel {
   String to;
   String date;
   String passenger;
-  String price;
+  int price;
 
   PlanModel({
     required this.id,
