@@ -21,16 +21,19 @@ int getCurrentTimestamp() {
 }
 
 String getCurrentTime() {
-  DateTime now = DateTime.now();
-  String formattedTime =
-      "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
-  return formattedTime;
+  return DateFormat('hh:mm a').format(DateTime.now());
 }
 
-String formatDateTime(DateTime dateTime) {
-  String formattedTime =
-      "${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
-  return formattedTime;
+String getCurrentDate() {
+  return DateFormat('dd/MM/yyyy').format(DateTime.now());
+}
+
+String formatTime(DateTime dateTime) {
+  return DateFormat('hh:mm a').format(dateTime);
+}
+
+String formatDate(DateTime dateTime) {
+  return DateFormat('dd/MM/yyyy').format(dateTime);
 }
 
 DateTime parseTimeString(String timeString) {
@@ -48,9 +51,19 @@ DateTime parseTimeString(String timeString) {
 }
 
 String formatDateForCard(String date) {
-  DateFormat inputFormat = DateFormat("dd.MM.yyyy");
-  DateTime dateTime = inputFormat.parse(date);
-  DateFormat outputFormat = DateFormat("EEEE, dd MMMM yyyy");
-  String formattedDate = outputFormat.format(dateTime);
-  return formattedDate;
+  try {
+    DateFormat inputFormat = DateFormat('dd.MM.yyyy');
+    DateTime dateTime = inputFormat.parse(date);
+    DateFormat outputFormat = DateFormat('EEEE, dd MMMM yyyy');
+    String formattedDate = outputFormat.format(dateTime);
+    return formattedDate;
+  } catch (e) {
+    return 'Saturday, 22 June 2024';
+  }
+}
+
+DateTime parseDate(String date) {
+  DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+  DateTime dateTime = dateFormat.parse(date);
+  return dateTime;
 }

@@ -15,6 +15,7 @@ class PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.blue50,
         borderRadius: BorderRadius.circular(12),

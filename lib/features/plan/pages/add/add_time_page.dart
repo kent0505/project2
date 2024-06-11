@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,6 +6,7 @@ import '../../../../core/config/app_colors.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
+import '../../../../core/widgets/picker/time_picker.dart';
 import '../../../../core/widgets/textfields/time_field.dart';
 import '../../models/plan_model.dart';
 
@@ -21,6 +23,29 @@ class _AddTimePageState extends State<AddTimePage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
 
+  String pickedTime = '';
+
+  void showTimePicker(TextEditingController controller) {
+    showCupertinoModalPopup(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return TimePicker(
+          time: controller.text,
+          onSave: () {
+            setState(() {
+              controller.text = pickedTime;
+            });
+            context.pop();
+          },
+          onDateTimeChanged: (newTime) {
+            pickedTime = formatTime(newTime);
+          },
+        );
+      },
+    );
+  }
+
   void onNext() {
     context.push(
       '/add-plan',
@@ -36,6 +61,13 @@ class _AddTimePageState extends State<AddTimePage> {
         price: 0,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller1.text = getCurrentTime();
+    controller2.text = getCurrentTime();
   }
 
   @override
@@ -71,12 +103,18 @@ class _AddTimePageState extends State<AddTimePage> {
                     children: [
                       TimeField(
                         controller: controller1,
-                        onTap: () {},
+                        suffixText: 'departure time',
+                        onTap: () {
+                          showTimePicker(controller1);
+                        },
                       ),
                       const Spacer(),
                       TimeField(
                         controller: controller2,
-                        onTap: () {},
+                        suffixText: 'arrival time',
+                        onTap: () {
+                          showTimePicker(controller2);
+                        },
                       ),
                     ],
                   ),

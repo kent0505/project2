@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../config/app_colors.dart';
 
-class TimeField extends StatelessWidget {
-  const TimeField({
+class DateField extends StatelessWidget {
+  const DateField({
     super.key,
     required this.controller,
     this.hintText = '...',
-    this.suffixText = '',
-    this.onChanged,
     this.onTap,
   });
 
   final TextEditingController controller;
   final String hintText;
-  final String suffixText;
-  final void Function(String)? onChanged;
+
   final void Function()? onTap;
 
   @override
@@ -25,6 +22,7 @@ class TimeField extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: TextField(
+          textAlign: TextAlign.center,
           controller: controller,
           keyboardType: TextInputType.number,
           enabled: false,
@@ -37,12 +35,6 @@ class TimeField extends StatelessWidget {
             filled: true,
             fillColor: AppColors.grey8,
             hintText: hintText,
-            suffixText: suffixText,
-            suffixStyle: TextStyle(
-              color: AppColors.grey50,
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
             hintStyle: TextStyle(
               color: AppColors.grey40,
               fontSize: 16,
@@ -64,7 +56,6 @@ class TimeField extends StatelessWidget {
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          onChanged: onChanged,
         ),
       ),
     );

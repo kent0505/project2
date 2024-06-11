@@ -6,10 +6,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/config/router.dart';
 import 'core/config/themes.dart';
 import 'features/home/bloc/home_bloc.dart';
+import 'features/plan/bloc/plan_bloc.dart';
 
 void main() async {
   await Hive.initFlutter();
-  // await Hive.deleteBoxFromDisk('mybox');
+  // await Hive.deleteBoxFromDisk('travelbox');
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()),
-        // BlocProvider(create: (context) => PlanBloc()),
+        BlocProvider(create: (context) => PlanBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

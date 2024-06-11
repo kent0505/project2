@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../information/pages/information_page.dart';
+import '../plan/bloc/plan_bloc.dart';
 import '../plan/pages/plan_page.dart';
 import '../settings/settings_page.dart';
 import 'bloc/home_bloc.dart';
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // context.read<PlanBloc>().add(GetPlansEvent());
+    context.read<PlanBloc>().add(GetPlansEvent());
   }
 
   @override
