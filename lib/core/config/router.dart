@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:travel_test/features/plan/pages/plan_detail_page.dart';
 
 import '../../features/home/home_page.dart';
 import '../../features/information/models/news_model.dart';
@@ -29,6 +30,12 @@ final routerConfig = GoRouter(
       path: '/news',
       builder: (context, state) => NewsDetailPage(
         newsModel: state.extra as NewsModel,
+      ),
+    ),
+    GoRoute(
+      path: '/plan-detail',
+      builder: (context, state) => PlanDetailPage(
+        planModel: state.extra as PlanModel,
       ),
     ),
     // add

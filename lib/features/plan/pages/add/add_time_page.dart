@@ -32,7 +32,7 @@ class _AddTimePageState extends State<AddTimePage> {
         from: '',
         to: '',
         date: '',
-        passenger: '',
+        passenger: 0,
         price: 0,
       ),
     );

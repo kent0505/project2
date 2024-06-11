@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 bool onboarding = true;
@@ -44,4 +45,12 @@ DateTime parseTimeString(String timeString) {
   } catch (e) {
     return DateTime.now();
   }
+}
+
+String formatDateForCard(String date) {
+  DateFormat inputFormat = DateFormat("dd.MM.yyyy");
+  DateTime dateTime = inputFormat.parse(date);
+  DateFormat outputFormat = DateFormat("EEEE, dd MMMM yyyy");
+  String formattedDate = outputFormat.format(dateTime);
+  return formattedDate;
 }

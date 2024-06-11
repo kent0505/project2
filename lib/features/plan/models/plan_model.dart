@@ -6,7 +6,7 @@ class PlanModel {
   String from;
   String to;
   String date;
-  String passenger;
+  int passenger;
   int price;
 
   PlanModel({

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
+import '../models/plan_model.dart';
 import '../widgets/plan_card.dart';
 
 class PlanPage extends StatelessWidget {
@@ -18,14 +19,26 @@ class PlanPage extends StatelessWidget {
             children: [
               ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: const [
-                  SizedBox(height: 20),
-                  PlanCard(),
-                  SizedBox(height: 20),
-                  PlanCard(),
-                  SizedBox(height: 20),
-                  PlanCard(),
-                  SizedBox(height: 170),
+                children: [
+                  const SizedBox(height: 20),
+                  PlanCard(
+                    planModel: PlanModel(
+                      id: 1,
+                      name: 'Aaa',
+                      departureTime: '12:10',
+                      arrivalTime: '22:06',
+                      from: 'Tashkent',
+                      to: 'New-York',
+                      date: '22.06.2024',
+                      passenger: 1,
+                      price: 1000,
+                    ),
+                  ),
+                  // SizedBox(height: 20),
+                  // PlanCard(),
+                  // SizedBox(height: 20),
+                  // PlanCard(),
+                  const SizedBox(height: 170),
                 ],
               ),
               Align(
