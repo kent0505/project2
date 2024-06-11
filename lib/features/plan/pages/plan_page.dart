@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../core/widgets/appbar/custom_appbar.dart';
-import '../../core/widgets/buttons/primary_button.dart';
-import 'widgets/plan_card.dart';
+import '../../../core/widgets/appbar/custom_appbar.dart';
+import '../../../core/widgets/buttons/primary_button.dart';
+import '../widgets/plan_card.dart';
 
 class PlanPage extends StatelessWidget {
   const PlanPage({super.key});
@@ -11,7 +12,7 @@ class PlanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppbar(title: 'Planned trips'),
+        const CustomAppBar(title: 'Planned trips'),
         Expanded(
           child: Stack(
             children: [
@@ -30,17 +31,24 @@ class PlanPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 100),
+                  padding: const EdgeInsets.only(
+                    bottom: 45,
+                    left: 25,
+                    right: 25,
+                  ),
                   child: PrimaryButton(
                     title: '+ Add    ',
                     borderRadius: 32,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push('/add-name');
+                    },
                   ),
                 ),
               ),
             ],
           ),
         ),
+        const SizedBox(height: 65),
       ],
     );
   }

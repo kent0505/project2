@@ -8,6 +8,8 @@ class AppColors {
   static Color blue50 = const Color(0xff36698F).withOpacity(0.5);
   static const Color purple = Color(0xff5236BF);
   static const Color grey = Color(0xff9698A9);
+  static Color grey8 = const Color(0xffF5F5F5).withOpacity(0.08);
+  static Color grey30 = const Color(0xffF5F5F5).withOpacity(0.3);
   static Color grey40 = const Color(0xffF5F5F5).withOpacity(0.4);
   static Color grey50 = const Color(0xffF5F5F5).withOpacity(0.5);
   static Color grey60 = const Color(0xffEBEBF5).withOpacity(0.6);

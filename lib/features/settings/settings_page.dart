@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppbar(title: 'Settings'),
+        const CustomAppBar(title: 'Settings'),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -53,7 +53,7 @@ class _SettingsTile extends StatelessWidget {
     return Container(
       height: 56,
       decoration: BoxDecoration(
-        color: AppColors.tab,
+        color: AppColors.grey30,
         borderRadius: BorderRadius.circular(16),
       ),
       child: CupertinoButton(

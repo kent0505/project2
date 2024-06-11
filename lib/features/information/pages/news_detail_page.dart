@@ -20,7 +20,7 @@ class NewsDetailPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          CustomAppbar(
+          CustomAppBar(
             title: 'Aaa',
             onPressed: () {
               context.pop();

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../config/app_colors.dart';
 
-class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
     super.key,
     required this.title,
     this.onPressed,

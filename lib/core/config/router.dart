@@ -3,11 +3,12 @@ import 'package:go_router/go_router.dart';
 import '../../features/home/home_page.dart';
 import '../../features/information/models/news_model.dart';
 import '../../features/information/pages/news_detail_page.dart';
+import '../../features/plan/pages/add/add_name_page.dart';
 import '../../features/splash/onboard_page.dart';
 import '../../features/splash/splash_page.dart';
 
 final routerConfig = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',
@@ -26,6 +27,11 @@ final routerConfig = GoRouter(
       builder: (context, state) => NewsDetailPage(
         newsModel: state.extra as NewsModel,
       ),
+    ),
+    // add
+    GoRoute(
+      path: '/add-name',
+      builder: (context, state) => const AddNamePage(),
     ),
   ],
 );

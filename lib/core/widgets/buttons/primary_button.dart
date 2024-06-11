@@ -10,6 +10,7 @@ class PrimaryButton extends StatelessWidget {
     this.icon,
     this.svg = '',
     this.borderRadius = 16,
+    this.width,
     required this.onPressed,
   });
 
@@ -17,13 +18,14 @@ class PrimaryButton extends StatelessWidget {
   final IconData? icon;
   final String svg;
   final double borderRadius;
+  final double? width;
   final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: 250,
+      width: width,
       decoration: BoxDecoration(
         color: AppColors.blue,
         borderRadius: BorderRadius.circular(borderRadius),

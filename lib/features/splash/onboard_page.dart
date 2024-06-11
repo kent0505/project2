@@ -16,64 +16,57 @@ class _OnboardPageState extends State<OnboardPage> {
   final controller = PageController();
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvoked: (_) {
-        controller.animateToPage(
-          controller.page!.toInt() - 1,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeIn,
-        );
-      },
-      child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: controller,
-                physics: const NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _PageContent(
-                    'Simplify your travel\nto anywhere in the\nworld',
-                    image: '1.png',
-                    onPressed: () {
-                      controller.animateToPage(
-                        controller.page!.toInt() + 1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeIn,
-                      );
-                    },
-                  ),
-                  _PageContent(
-                    'Record your transfer',
-                    image: '2.png',
-                    onPressed: () {
-                      controller.animateToPage(
-                        controller.page!.toInt() + 1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.easeIn,
-                      );
-                    },
-                  ),
-                  _PageContent(
-                    'See and read different information about interesting places.',
-                    image: '3.png',
-                    last: true,
-                    onPressed: () {
-                      // controller.animateToPage(
-                      //   0,
-                      //   duration: const Duration(milliseconds: 400),
-                      //   curve: Curves.easeIn,
-                      // );
-                      context.go('/home');
-                    },
-                  ),
-                ],
-              ),
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              controller: controller,
+              // physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              children: [
+                _PageContent(
+                  'Simplify your travel\nto anywhere in the\nworld',
+                  image: '1.png',
+                  onPressed: () {
+                    controller.animateToPage(
+                      controller.page!.toInt() + 1,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeIn,
+                    );
+                  },
+                ),
+                _PageContent(
+                  'Record your transfer',
+                  image: '2.png',
+                  onPressed: () {
+                    controller.animateToPage(
+                      controller.page!.toInt() + 1,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeIn,
+                    );
+                  },
+                ),
+                _PageContent(
+                  'See and read different\ninformation about\ninteresting places.',
+                  image: '3.png',
+                  last: true,
+                  onPressed: () {
+                    context.go('/home');
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -97,7 +90,10 @@ class _PageContent extends StatelessWidget {
     return Column(
       children: [
         const Spacer(),
-        Image.asset('assets/icons/$image'),
+        Image.asset(
+          'assets/icons/$image',
+          width: 424,
+        ),
         Text(
           title,
           textAlign: TextAlign.center,

@@ -14,7 +14,7 @@ class InformationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppbar(title: 'News'),
+        const CustomAppBar(title: 'News'),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 13),
@@ -68,10 +68,11 @@ class InformationPage extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 15),
             ],
           ),
         ),
+        const SizedBox(height: 65),
       ],
     );
   }
