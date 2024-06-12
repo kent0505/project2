@@ -27,18 +27,14 @@ String formatCountry(String country) {
 String getDifferenceTime(String from, String to) {
   DateFormat format = DateFormat('hh:mm a');
   Duration difference = format.parse(from).difference(format.parse(to));
-  String hour = '${difference.inHours}h';
-  String minute = '${difference.inMinutes}m';
 
-  if (difference.inHours == 0) {
-    hour = '';
-    print(hour);
-  }
-  if (difference.inMinutes == 0) {
-    minute = '';
-    print(minute);
-  }
-  return '$hour $minute'.replaceAll('-', '');
+  int hours = difference.inMinutes ~/ 60;
+  int minutes = difference.inMinutes % 60;
+
+  // Format as "HH:mm"
+  String formattedTime =
+      '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  return formattedTime.replaceAll('-', '');
 }
 
 String convertMinutesToTime(int totalMinutes) {
@@ -57,6 +53,19 @@ int getCurrentTimestamp() {
 
 String getCurrentTime() {
   return DateFormat('hh:mm a').format(DateTime.now());
+}
+
+String getDifference(String time) {
+  int totalMinutes = int.parse(time);
+
+  // Calculate hours and minutes
+  int hours = totalMinutes ~/ 60;
+  int minutes = totalMinutes % 60;
+
+  // Format as "HH:mm"
+  String formattedTime =
+      '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  return formattedTime;
 }
 
 String getCurrentDate() {

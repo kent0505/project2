@@ -3,24 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_colors.dart';
-import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
 import '../../models/plan.dart';
 import '../../models/transfer.dart';
 
-class AddNamePage extends StatefulWidget {
-  const AddNamePage({super.key});
+class EditNamePage extends StatefulWidget {
+  const EditNamePage({super.key, required this.plan});
+
+  final Plan plan;
 
   @override
-  State<AddNamePage> createState() => _AddNamePageState();
+  State<EditNamePage> createState() => _EditNamePageState();
 }
 
-class _AddNamePageState extends State<AddNamePage> {
+class _EditNamePageState extends State<EditNamePage> {
   final controller1 = TextEditingController();
 
-  bool active = false;
+  bool active = true;
   bool expanded = false;
   bool transfer = false;
 
@@ -36,22 +37,44 @@ class _AddNamePageState extends State<AddNamePage> {
 
   void onNext() {
     if (transfer) {
-      context.push('/add-transfer', extra: controller1.text);
+      context.push(
+        '/edit-transfer',
+        extra: Plan(
+          id: widget.plan.id,
+          name: controller1.text,
+          departureTime: widget.plan.departureTime,
+          arrivalTime: widget.plan.arrivalTime,
+          fromCountry: widget.plan.fromCountry,
+          fromCity: widget.plan.fromCity,
+          toCountry: widget.plan.toCountry,
+          toCity: widget.plan.toCity,
+          date: widget.plan.date,
+          passenger: widget.plan.passenger,
+          price: widget.plan.price,
+          transfer: Transfer(
+            date: widget.plan.transfer.date,
+            timeFrom: widget.plan.transfer.timeFrom,
+            timeTo: widget.plan.transfer.timeTo,
+            passenger: widget.plan.transfer.passenger,
+            price: widget.plan.transfer.price,
+          ),
+        ),
+      );
     } else {
       context.push(
-        '/add-time',
+        '/edit-time',
         extra: Plan(
-          id: getCurrentTimestamp(),
+          id: widget.plan.id,
           name: controller1.text,
-          departureTime: '',
-          arrivalTime: '',
-          fromCountry: '',
-          fromCity: '',
-          toCountry: '',
-          toCity: '',
-          date: '',
-          passenger: 0,
-          price: 0,
+          departureTime: widget.plan.departureTime,
+          arrivalTime: widget.plan.arrivalTime,
+          fromCountry: widget.plan.fromCountry,
+          fromCity: widget.plan.fromCity,
+          toCountry: widget.plan.toCountry,
+          toCity: widget.plan.toCity,
+          date: widget.plan.date,
+          passenger: widget.plan.passenger,
+          price: widget.plan.price,
           transfer: Transfer(
             date: '',
             timeFrom: '',
@@ -62,6 +85,12 @@ class _AddNamePageState extends State<AddNamePage> {
         ),
       );
     }
+  }
+
+  @override
+  void initState() {
+    controller1.text = widget.plan.name;
+    super.initState();
   }
 
   @override

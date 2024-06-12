@@ -13,16 +13,16 @@ import '../../models/plan.dart';
 import '../../models/transfer.dart';
 import '../../widgets/field_card.dart';
 
-class AddTransferPage extends StatefulWidget {
-  const AddTransferPage({super.key, required this.name});
+class EditTransferPage extends StatefulWidget {
+  const EditTransferPage({super.key, required this.plan});
 
-  final String name;
+  final Plan plan;
 
   @override
-  State<AddTransferPage> createState() => _AddTransferPageState();
+  State<EditTransferPage> createState() => _EditTransferPageState();
 }
 
-class _AddTransferPageState extends State<AddTransferPage> {
+class _EditTransferPageState extends State<EditTransferPage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final controller3 = TextEditingController();
@@ -98,19 +98,19 @@ class _AddTransferPageState extends State<AddTransferPage> {
 
   void onNext() {
     context.push(
-      '/add-time',
+      '/edit-time',
       extra: Plan(
-        id: getCurrentTimestamp(),
-        name: widget.name,
-        departureTime: '',
-        arrivalTime: '',
-        fromCountry: '',
-        fromCity: '',
-        toCountry: '',
-        toCity: '',
-        date: '',
-        passenger: 0,
-        price: 0,
+        id: widget.plan.id,
+        name: widget.plan.name,
+        departureTime: widget.plan.departureTime,
+        arrivalTime: widget.plan.arrivalTime,
+        fromCountry: widget.plan.fromCountry,
+        fromCity: widget.plan.fromCity,
+        toCountry: widget.plan.toCountry,
+        toCity: widget.plan.toCity,
+        date: widget.plan.date,
+        passenger: widget.plan.passenger,
+        price: widget.plan.price,
         transfer: Transfer(
           date: controller1.text,
           timeFrom: controller2.text,
@@ -125,9 +125,18 @@ class _AddTransferPageState extends State<AddTransferPage> {
   @override
   void initState() {
     super.initState();
-    controller1.text = getCurrentDate();
-    controller2.text = getCurrentTime();
-    controller3.text = getCurrentTime();
+    if (widget.plan.transfer.date.isEmpty) {
+      controller1.text = getCurrentDate();
+      controller2.text = getCurrentTime();
+      controller3.text = getCurrentTime();
+    } else {
+      controller1.text = widget.plan.transfer.date;
+      controller2.text = widget.plan.transfer.timeFrom;
+      controller3.text = widget.plan.transfer.timeTo;
+      controller4.text = widget.plan.transfer.passenger.toString();
+      controller5.text = widget.plan.transfer.price.toString();
+      active = true;
+    }
   }
 
   @override

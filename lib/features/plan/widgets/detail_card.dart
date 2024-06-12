@@ -66,16 +66,22 @@ class DetailCard extends StatelessWidget {
                       width: 155,
                       child: Stack(
                         children: [
-                          Positioned(
-                            bottom: 8,
-                            child: SvgPicture.asset('assets/icons/dash.svg'),
+                          const Positioned(
+                            bottom: -1.5,
+                            child: Text(
+                              '- — — — — — — -',
+                              maxLines: 1,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                color: Color(0xffE0E0E0),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
                           ),
                           Positioned(
-                            right: 72,
-                            child: SvgPicture.asset(
-                              'assets/icons/plane.svg',
-                              height: 14,
-                            ),
+                            right: 68,
+                            child: SvgPicture.asset('assets/icons/plane.svg'),
                           ),
                         ],
                       ),

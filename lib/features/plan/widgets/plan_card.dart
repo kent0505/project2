@@ -298,12 +298,19 @@ class _BlackCard extends StatelessWidget {
                         width: 155,
                         child: Stack(
                           children: [
-                            Positioned(
-                              bottom: 8,
-                              child: SvgPicture.asset('assets/icons/dash.svg'),
+                            const Text(
+                              '- — — — — — — — — — -',
+                              maxLines: 1,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                color: AppColors.purple,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                             Positioned(
                               right: 72,
+                              bottom: 0,
                               child: SvgPicture.asset(
                                 'assets/icons/plane.svg',
                                 height: 14,

@@ -37,13 +37,7 @@ class InformationPage extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        DashPlane(),
-                      ],
-                    ),
-                    SizedBox(width: 13),
+                    DashPlane(dash: '- — — — — — — — — -', right: 80),
                   ],
                 ),
               ),

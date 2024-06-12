@@ -3,8 +3,11 @@ import 'package:flutter/cupertino.dart';
 import '../../../core/config/app_colors.dart';
 
 class TransferCard extends StatefulWidget {
-  const TransferCard(
-      {super.key, required this.expanded, required this.transfer});
+  const TransferCard({
+    super.key,
+    required this.expanded,
+    required this.transfer,
+  });
 
   final bool expanded;
   final String transfer;

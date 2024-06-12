@@ -12,16 +12,16 @@ import '../../models/plan.dart';
 import '../../models/transfer.dart';
 import '../../widgets/field_card.dart';
 
-class AddPlanPage extends StatefulWidget {
-  const AddPlanPage({super.key, required this.plan});
+class EditPlanPage extends StatefulWidget {
+  const EditPlanPage({super.key, required this.plan});
 
   final Plan plan;
 
   @override
-  State<AddPlanPage> createState() => _AddPlanPageState();
+  State<EditPlanPage> createState() => _EditPlanPageState();
 }
 
-class _AddPlanPageState extends State<AddPlanPage> {
+class _EditPlanPageState extends State<EditPlanPage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final controller3 = TextEditingController();
@@ -30,7 +30,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
   final controller6 = TextEditingController();
   final controller7 = TextEditingController();
 
-  bool active = false;
+  bool active = true;
   String pickedTime = '';
 
   void onChanged(String text) {
@@ -75,9 +75,9 @@ class _AddPlanPageState extends State<AddPlanPage> {
     );
   }
 
-  void onCreate() {
+  void onEdit() {
     context.read<PlanBloc>().add(
-          AddPlanEvent(
+          EditPlanEvent(
             plan: Plan(
               id: widget.plan.id,
               name: widget.plan.name,
@@ -106,7 +106,13 @@ class _AddPlanPageState extends State<AddPlanPage> {
   @override
   void initState() {
     super.initState();
-    controller5.text = getCurrentDate();
+    controller1.text = widget.plan.fromCountry;
+    controller2.text = widget.plan.fromCity;
+    controller3.text = widget.plan.toCountry;
+    controller4.text = widget.plan.toCity;
+    controller5.text = widget.plan.date;
+    controller6.text = widget.plan.passenger.toString();
+    controller7.text = widget.plan.price.toString();
   }
 
   @override
@@ -187,10 +193,10 @@ class _AddPlanPageState extends State<AddPlanPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PrimaryButton(
-                      title: 'Create',
+                      title: 'Edit',
                       width: 250,
                       active: active,
-                      onPressed: onCreate,
+                      onPressed: onEdit,
                     ),
                   ],
                 ),

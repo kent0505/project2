@@ -8,6 +8,10 @@ import '../../features/plan/pages/add/add_name_page.dart';
 import '../../features/plan/pages/add/add_plan_page.dart';
 import '../../features/plan/pages/add/add_time_page.dart';
 import '../../features/plan/pages/add/add_transfer_page.dart';
+import '../../features/plan/pages/edit/edit_name_page.dart';
+import '../../features/plan/pages/edit/edit_plan_page.dart';
+import '../../features/plan/pages/edit/edit_time_page.dart';
+import '../../features/plan/pages/edit/edit_transfer_page.dart';
 import '../../features/plan/pages/plan_detail_page.dart';
 import '../../features/splash/onboard_page.dart';
 import '../../features/splash/splash_page.dart';
@@ -59,6 +63,31 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/add-plan',
       builder: (context, state) => AddPlanPage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    // edit
+    GoRoute(
+      path: '/edit-name',
+      builder: (context, state) => EditNamePage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-transfer',
+      builder: (context, state) => EditTransferPage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-time',
+      builder: (context, state) => EditTimePage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-plan',
+      builder: (context, state) => EditPlanPage(
         plan: state.extra as Plan,
       ),
     ),

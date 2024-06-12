@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
+import '../../../core/widgets/buttons/txt_button.dart';
+import '../../../core/widgets/dialogs/dialog_widget.dart';
 import '../bloc/plan_bloc.dart';
 import '../models/plan.dart';
 import '../widgets/detail_card.dart';
@@ -21,7 +23,7 @@ class PlanDetailPage extends StatelessWidget {
       body: Column(
         children: [
           CustomAppBar(
-            title: 'Aaa',
+            title: plan.name,
             onPressed: () {
               context.pop();
             },
@@ -30,6 +32,7 @@ class PlanDetailPage extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
+                const SizedBox(height: 16),
                 DetailCard(plan: plan),
                 const SizedBox(height: 16),
                 _FlightCard(plan: plan),
@@ -70,15 +73,40 @@ class PlanDetailPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   _TransferDataCard(
                     title: 'Price',
-                    data: '${plan.price}\$',
+                    data: '${plan.transfer.price}\$',
                   ),
                   const SizedBox(height: 16),
                 ],
-                PrimaryButton(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    PrimaryButton(
+                      title: 'Edit',
+                      width: 250,
+                      onPressed: () {
+                        context.push('/edit-name', extra: plan);
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                TxtButton(
                   title: 'Delete',
                   onPressed: () {
-                    context.read<PlanBloc>().add(DeletePlanEvent(id: plan.id));
-                    context.pop();
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return DialogWidget(
+                          title: 'Delete plan?',
+                          onPressed: () {
+                            context
+                                .read<PlanBloc>()
+                                .add(DeletePlanEvent(id: plan.id));
+                            context.pop();
+                          },
+                        );
+                      },
+                    );
                   },
                 ),
                 const SizedBox(height: 16),

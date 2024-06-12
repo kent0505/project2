@@ -11,16 +11,16 @@ import '../../../../core/widgets/textfields/time_field.dart';
 import '../../models/plan.dart';
 import '../../models/transfer.dart';
 
-class AddTimePage extends StatefulWidget {
-  const AddTimePage({super.key, required this.plan});
+class EditTimePage extends StatefulWidget {
+  const EditTimePage({super.key, required this.plan});
 
   final Plan plan;
 
   @override
-  State<AddTimePage> createState() => _AddTimePageState();
+  State<EditTimePage> createState() => _EditTimePageState();
 }
 
-class _AddTimePageState extends State<AddTimePage> {
+class _EditTimePageState extends State<EditTimePage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
 
@@ -49,9 +49,9 @@ class _AddTimePageState extends State<AddTimePage> {
 
   void onNext() {
     context.push(
-      '/add-plan',
+      '/edit-plan',
       extra: Plan(
-        id: getCurrentTimestamp(),
+        id: widget.plan.id,
         name: widget.plan.name,
         departureTime: controller1.text,
         arrivalTime: controller2.text,
@@ -76,8 +76,8 @@ class _AddTimePageState extends State<AddTimePage> {
   @override
   void initState() {
     super.initState();
-    controller1.text = getCurrentTime();
-    controller2.text = getCurrentTime();
+    controller1.text = widget.plan.departureTime;
+    controller2.text = widget.plan.arrivalTime;
   }
 
   @override

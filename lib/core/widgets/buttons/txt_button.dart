@@ -23,9 +23,9 @@ class TxtButton extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: AppColors.grey40,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+              color: AppColors.grey50,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
