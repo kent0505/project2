@@ -8,12 +8,13 @@ import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/picker/time_picker.dart';
 import '../../../../core/widgets/textfields/time_field.dart';
-import '../../models/plan_model.dart';
+import '../../models/plan.dart';
+import '../../models/transfer.dart';
 
 class AddTimePage extends StatefulWidget {
-  const AddTimePage({super.key, required this.name});
+  const AddTimePage({super.key, required this.plan});
 
-  final String name;
+  final Plan plan;
 
   @override
   State<AddTimePage> createState() => _AddTimePageState();
@@ -49,16 +50,25 @@ class _AddTimePageState extends State<AddTimePage> {
   void onNext() {
     context.push(
       '/add-plan',
-      extra: PlanModel(
+      extra: Plan(
         id: getCurrentTimestamp(),
-        name: widget.name,
+        name: widget.plan.name,
         departureTime: controller1.text,
         arrivalTime: controller2.text,
-        from: '',
-        to: '',
-        date: '',
-        passenger: 0,
-        price: 0,
+        fromCountry: widget.plan.fromCountry,
+        fromCity: widget.plan.fromCity,
+        toCountry: widget.plan.toCountry,
+        toCity: widget.plan.toCity,
+        date: widget.plan.date,
+        passenger: widget.plan.passenger,
+        price: widget.plan.price,
+        transfer: Transfer(
+          date: widget.plan.transfer.date,
+          timeFrom: widget.plan.transfer.timeFrom,
+          timeTo: widget.plan.transfer.timeTo,
+          passenger: widget.plan.transfer.passenger,
+          price: widget.plan.transfer.price,
+        ),
       ),
     );
   }
@@ -92,6 +102,7 @@ class _AddTimePageState extends State<AddTimePage> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
+                const SizedBox(height: 8),
                 Container(
                   height: 144,
                   padding: const EdgeInsets.all(16),

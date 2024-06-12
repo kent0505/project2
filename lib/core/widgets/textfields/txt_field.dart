@@ -50,6 +50,7 @@ class TxtField extends StatelessWidget {
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
+        onChanged: onChanged,
       ),
     );
   }

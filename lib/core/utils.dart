@@ -16,6 +16,41 @@ Future<void> saveBool(String key, bool value) async {
   prefs.setBool(key, value);
 }
 
+String formatCountry(String country) {
+  if (country.length > 3) {
+    return country.substring(0, 3).toUpperCase();
+  } else {
+    return country.toUpperCase();
+  }
+}
+
+String getDifferenceTime(String from, String to) {
+  DateFormat format = DateFormat('hh:mm a');
+  Duration difference = format.parse(from).difference(format.parse(to));
+  String hour = '${difference.inHours}h';
+  String minute = '${difference.inMinutes}m';
+
+  if (difference.inHours == 0) {
+    hour = '';
+    print(hour);
+  }
+  if (difference.inMinutes == 0) {
+    minute = '';
+    print(minute);
+  }
+  return '$hour $minute'.replaceAll('-', '');
+}
+
+String convertMinutesToTime(int totalMinutes) {
+  int hours = totalMinutes ~/ 60;
+  int minutes = totalMinutes % 60;
+
+  DateTime time = DateTime(0, 1, 1, hours, minutes);
+
+  DateFormat format = DateFormat('hh:mm a');
+  return format.format(time);
+}
+
 int getCurrentTimestamp() {
   return DateTime.now().millisecondsSinceEpoch ~/ 1000;
 }

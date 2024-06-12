@@ -8,11 +8,12 @@ class DateField extends StatelessWidget {
     required this.controller,
     this.hintText = '...',
     this.onTap,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final String hintText;
-
+  final void Function(String)? onChanged;
   final void Function()? onTap;
 
   @override
@@ -56,6 +57,7 @@ class DateField extends StatelessWidget {
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          onChanged: onChanged,
         ),
       ),
     );

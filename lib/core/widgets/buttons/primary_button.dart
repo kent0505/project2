@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../config/app_colors.dart';
 
@@ -7,18 +6,16 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
     required this.title,
-    this.icon,
-    this.svg = '',
     this.borderRadius = 16,
     this.width,
+    this.active = true,
     required this.onPressed,
   });
 
   final String title;
-  final IconData? icon;
-  final String svg;
   final double borderRadius;
   final double? width;
+  final bool active;
   final void Function() onPressed;
 
   @override
@@ -27,31 +24,20 @@ class PrimaryButton extends StatelessWidget {
       height: 50,
       width: width,
       decoration: BoxDecoration(
-        color: AppColors.blue,
+        color: active ? AppColors.blue : AppColors.grey8,
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: CupertinoButton(
         padding: EdgeInsets.zero,
-        onPressed: onPressed,
+        onPressed: active ? onPressed : null,
         child: SizedBox(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) ...[
-                Icon(
-                  icon,
-                  color: AppColors.white,
-                ),
-                const SizedBox(width: 4),
-              ],
-              if (svg.isNotEmpty) ...[
-                SvgPicture.asset('assets/icons/$svg.svg'),
-                const SizedBox(width: 4),
-              ],
               Text(
                 title,
-                style: const TextStyle(
-                  color: AppColors.white,
+                style: TextStyle(
+                  color: active ? AppColors.white : AppColors.grey30,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),

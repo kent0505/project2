@@ -1,13 +1,14 @@
 import 'package:go_router/go_router.dart';
-import 'package:travel_test/features/plan/pages/plan_detail_page.dart';
 
 import '../../features/home/home_page.dart';
 import '../../features/information/models/news_model.dart';
 import '../../features/information/pages/news_detail_page.dart';
-import '../../features/plan/models/plan_model.dart';
+import '../../features/plan/models/plan.dart';
 import '../../features/plan/pages/add/add_name_page.dart';
 import '../../features/plan/pages/add/add_plan_page.dart';
 import '../../features/plan/pages/add/add_time_page.dart';
+import '../../features/plan/pages/add/add_transfer_page.dart';
+import '../../features/plan/pages/plan_detail_page.dart';
 import '../../features/splash/onboard_page.dart';
 import '../../features/splash/splash_page.dart';
 
@@ -35,7 +36,7 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/plan-detail',
       builder: (context, state) => PlanDetailPage(
-        planModel: state.extra as PlanModel,
+        plan: state.extra as Plan,
       ),
     ),
     // add
@@ -44,15 +45,21 @@ final routerConfig = GoRouter(
       builder: (context, state) => const AddNamePage(),
     ),
     GoRoute(
+      path: '/add-transfer',
+      builder: (context, state) => AddTransferPage(
+        name: state.extra as String,
+      ),
+    ),
+    GoRoute(
       path: '/add-time',
       builder: (context, state) => AddTimePage(
-        name: state.extra as String,
+        plan: state.extra as Plan,
       ),
     ),
     GoRoute(
       path: '/add-plan',
       builder: (context, state) => AddPlanPage(
-        planModel: state.extra as PlanModel,
+        plan: state.extra as Plan,
       ),
     ),
   ],

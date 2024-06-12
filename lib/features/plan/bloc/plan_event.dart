@@ -5,12 +5,12 @@ abstract class PlanEvent {}
 class GetPlansEvent extends PlanEvent {}
 
 class AddPlanEvent extends PlanEvent {
-  final PlanModel plan;
+  final Plan plan;
   AddPlanEvent({required this.plan});
 }
 
 class EditPlanEvent extends PlanEvent {
-  final PlanModel plan;
+  final Plan plan;
   EditPlanEvent({required this.plan});
 }
 

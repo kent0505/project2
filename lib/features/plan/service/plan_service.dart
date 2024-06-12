@@ -1,22 +1,23 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../models/plan_model.dart';
+import '../models/plan.dart';
 
 class PlanService {
-  PlanService() {
-    Hive.registerAdapter(PlanAdapter());
-  }
+  // PlanService() {
+  //   Hive.registerAdapter(PlanAdapter());
+  //   Hive.registerAdapter(TransferAdapter());
+  // }
 
-  List<PlanModel> plans = [];
+  List<Plan> plans = [];
 
-  Future<List<PlanModel>> getPlans() async {
+  Future<List<Plan>> getPlans() async {
     final box = await Hive.openBox('travelbox');
     List plans2 = box.get('plans') ?? [];
-    plans = plans2.cast<PlanModel>();
+    plans = plans2.cast<Plan>();
     return plans;
   }
 
-  Future<List<PlanModel>> updatePlans() async {
+  Future<List<Plan>> updatePlans() async {
     final box = await Hive.openBox('travelbox');
     box.put('plans', plans);
     plans = await box.get('plans');

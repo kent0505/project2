@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../information/widgets/dash_plane.dart';
-import '../models/plan_model.dart';
+import '../models/plan.dart';
 
 class PlanCard extends StatelessWidget {
-  const PlanCard({super.key, required this.planModel});
+  const PlanCard({super.key, required this.plan});
 
-  final PlanModel planModel;
+  final Plan plan;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class PlanCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 60,
+                width: 80,
                 child: Column(
                   children: [
                     Text(
-                      'UZB',
+                      formatCountry(plan.fromCountry),
                       style: TextStyle(
                         color: AppColors.grey60,
                         fontSize: 24,
@@ -39,7 +39,9 @@ class PlanCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      planModel.from,
+                      plan.fromCity,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -49,15 +51,15 @@ class PlanCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 16),
-              const DashPlane(width: 128, right: 54),
-              const SizedBox(width: 16),
+              const SizedBox(width: 10),
+              const DashPlane(width: 150, right: 66),
+              const SizedBox(width: 10),
               SizedBox(
-                width: 60,
+                width: 80,
                 child: Column(
                   children: [
                     Text(
-                      'USA',
+                      formatCountry(plan.toCountry),
                       style: TextStyle(
                         color: AppColors.grey60,
                         fontSize: 24,
@@ -65,7 +67,9 @@ class PlanCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      planModel.from,
+                      plan.toCity,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
@@ -79,7 +83,7 @@ class PlanCard extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Text(
-            '${formatDateForCard(planModel.date)} | ${planModel.passenger} Seat',
+            '${formatDateForCard(plan.date)} | ${plan.passenger} Seat',
             style: const TextStyle(
               color: AppColors.white,
               fontSize: 16,
@@ -87,7 +91,7 @@ class PlanCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          _BlackCard(planModel: planModel),
+          _BlackCard(plan: plan),
           const SizedBox(height: 30),
         ],
       ),
@@ -97,16 +101,16 @@ class PlanCard extends StatelessWidget {
 
 class _BlackCard extends StatelessWidget {
   const _BlackCard({
-    required this.planModel,
+    required this.plan,
   });
 
-  final PlanModel planModel;
+  final Plan plan;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
       onPressed: () {
-        context.push('/plan-detail', extra: planModel);
+        context.push('/plan-detail', extra: plan);
       },
       padding: EdgeInsets.zero,
       child: Container(
@@ -129,9 +133,9 @@ class _BlackCard extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/icons/pin.svg'),
                       const SizedBox(height: 4),
-                      const Text(
-                        'UZB', // CHANGE
-                        style: TextStyle(
+                      Text(
+                        formatCountry(plan.fromCountry),
+                        style: const TextStyle(
                           color: AppColors.purple,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -139,7 +143,7 @@ class _BlackCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        planModel.from,
+                        plan.fromCity,
                         style: const TextStyle(
                           color: Color(0xff9698A9),
                           fontSize: 8,
@@ -148,7 +152,7 @@ class _BlackCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        planModel.departureTime,
+                        plan.departureTime,
                         style: const TextStyle(
                           color: Color(0xff9698A9),
                           fontSize: 8,
@@ -188,11 +192,14 @@ class _BlackCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 6),
-                      const Text(
-                        '3h 40m', // CHANGE
-                        style: TextStyle(
+                      Text(
+                        getDifferenceTime(
+                          plan.departureTime,
+                          plan.arrivalTime,
+                        ),
+                        style: const TextStyle(
                           color: Color(0xff9698A9),
-                          fontSize: 8,
+                          fontSize: 18,
                           fontWeight: FontWeight.w300,
                         ),
                       ),
@@ -205,24 +212,26 @@ class _BlackCard extends StatelessWidget {
                         color: const Color(0xff0EC3AE),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        'USA', // CHANGE
-                        style: TextStyle(
+                      Text(
+                        formatCountry(plan.toCountry),
+                        style: const TextStyle(
                           color: AppColors.purple,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      const SizedBox(height: 4),
                       Text(
-                        planModel.to,
+                        plan.toCity,
                         style: const TextStyle(
                           color: Color(0xff9698A9),
                           fontSize: 8,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      const SizedBox(height: 4),
                       Text(
-                        planModel.arrivalTime,
+                        plan.arrivalTime,
                         style: const TextStyle(
                           color: Color(0xff9698A9),
                           fontSize: 8,
@@ -234,6 +243,7 @@ class _BlackCard extends StatelessWidget {
                 ],
               ),
             ),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -296,7 +306,7 @@ class _BlackCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    '${planModel.price}\$',
+                    '${plan.price}\$',
                     style: const TextStyle(
                       color: Color(0xff5C40CC),
                       fontSize: 12,

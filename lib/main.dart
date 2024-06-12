@@ -7,10 +7,14 @@ import 'core/config/router.dart';
 import 'core/config/themes.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/plan/bloc/plan_bloc.dart';
+import 'features/plan/models/plan.dart';
+import 'features/plan/models/transfer.dart';
 
 void main() async {
   await Hive.initFlutter();
   // await Hive.deleteBoxFromDisk('travelbox');
+  Hive.registerAdapter(PlanAdapter());
+  Hive.registerAdapter(TransferAdapter());
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/config/app_colors.dart';
 import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/picker/time_picker.dart';
-import '../../../../core/widgets/textfields/date_field.dart';
-import '../../../../core/widgets/textfields/num_field.dart';
-import '../../../../core/widgets/textfields/txt_field.dart';
 import '../../bloc/plan_bloc.dart';
-import '../../models/plan_model.dart';
+import '../../models/plan.dart';
+import '../../models/transfer.dart';
+import '../../widgets/field_card.dart';
 
 class AddPlanPage extends StatefulWidget {
-  const AddPlanPage({super.key, required this.planModel});
+  const AddPlanPage({super.key, required this.plan});
 
-  final PlanModel planModel;
+  final Plan plan;
 
   @override
   State<AddPlanPage> createState() => _AddPlanPageState();
@@ -29,10 +27,33 @@ class _AddPlanPageState extends State<AddPlanPage> {
   final controller3 = TextEditingController();
   final controller4 = TextEditingController();
   final controller5 = TextEditingController();
+  final controller6 = TextEditingController();
+  final controller7 = TextEditingController();
 
+  bool active = false;
   String pickedTime = '';
 
-  void showTimePicker(TextEditingController controller) {
+  void onChanged(String text) {
+    setState(() {
+      if (controller1.text.isEmpty) {
+        active = false;
+      } else if (controller2.text.isEmpty) {
+        active = false;
+      } else if (controller3.text.isEmpty) {
+        active = false;
+      } else if (controller4.text.isEmpty) {
+        active = false;
+      } else if (controller6.text.isEmpty) {
+        active = false;
+      } else if (controller7.text.isEmpty) {
+        active = false;
+      } else {
+        active = true;
+      }
+    });
+  }
+
+  void showDatePicker(TextEditingController controller) {
     showCupertinoModalPopup(
       context: context,
       barrierDismissible: false,
@@ -57,16 +78,25 @@ class _AddPlanPageState extends State<AddPlanPage> {
   void onCreate() {
     context.read<PlanBloc>().add(
           AddPlanEvent(
-            plan: PlanModel(
-              id: widget.planModel.id,
-              name: widget.planModel.name,
-              departureTime: widget.planModel.departureTime,
-              arrivalTime: widget.planModel.arrivalTime,
-              from: controller1.text,
-              to: controller2.text,
-              date: controller3.text,
-              passenger: int.tryParse(controller4.text) ?? 1,
-              price: int.tryParse(controller4.text) ?? 0,
+            plan: Plan(
+              id: widget.plan.id,
+              name: widget.plan.name,
+              departureTime: widget.plan.departureTime,
+              arrivalTime: widget.plan.arrivalTime,
+              fromCountry: controller1.text,
+              fromCity: controller2.text,
+              toCountry: controller3.text,
+              toCity: controller4.text,
+              date: controller5.text,
+              passenger: int.tryParse(controller6.text) ?? 1,
+              price: int.tryParse(controller7.text) ?? 0,
+              transfer: Transfer(
+                date: '',
+                timeFrom: '',
+                timeTo: '',
+                passenger: 0,
+                price: 0,
+              ),
             ),
           ),
         );
@@ -76,7 +106,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
   @override
   void initState() {
     super.initState();
-    controller3.text = getCurrentDate();
+    controller5.text = getCurrentDate();
   }
 
   @override
@@ -86,6 +116,8 @@ class _AddPlanPageState extends State<AddPlanPage> {
     controller3.dispose();
     controller4.dispose();
     controller5.dispose();
+    controller6.dispose();
+    controller7.dispose();
     super.dispose();
   }
 
@@ -105,32 +137,49 @@ class _AddPlanPageState extends State<AddPlanPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               children: [
                 const SizedBox(height: 24),
-                _FieldCard(
+                FieldCard(
                   controller: controller1,
-                  title: 'From',
+                  title: 'From (Country)',
+                  onChanged: onChanged,
                 ),
                 const SizedBox(height: 14),
-                _FieldCard(
+                FieldCard(
                   controller: controller2,
-                  title: 'To',
+                  title: 'From (City)',
+                  onChanged: onChanged,
                 ),
                 const SizedBox(height: 14),
-                _FieldCard(
+                FieldCard(
                   controller: controller3,
+                  title: 'To (Country)',
+                  onChanged: onChanged,
+                ),
+                const SizedBox(height: 14),
+                FieldCard(
+                  controller: controller4,
+                  title: 'To (City)',
+                  onChanged: onChanged,
+                ),
+                const SizedBox(height: 14),
+                FieldCard(
+                  controller: controller5,
                   title: 'Date',
+                  onChanged: onChanged,
                   onTap: () {
-                    showTimePicker(controller3);
+                    showDatePicker(controller5);
                   },
                 ),
                 const SizedBox(height: 14),
-                _FieldCard(
-                  controller: controller4,
+                FieldCard(
+                  controller: controller6,
                   title: 'Passenger',
+                  onChanged: onChanged,
                 ),
                 const SizedBox(height: 14),
-                _FieldCard(
-                  controller: controller5,
+                FieldCard(
+                  controller: controller7,
                   title: 'Price/Hotel',
+                  onChanged: onChanged,
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -139,6 +188,7 @@ class _AddPlanPageState extends State<AddPlanPage> {
                     PrimaryButton(
                       title: 'Create',
                       width: 250,
+                      active: active,
                       onPressed: onCreate,
                     ),
                   ],
@@ -147,53 +197,6 @@ class _AddPlanPageState extends State<AddPlanPage> {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _FieldCard extends StatelessWidget {
-  const _FieldCard({
-    required this.controller,
-    required this.title,
-    this.onTap,
-  });
-
-  final TextEditingController controller;
-  final String title;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: AppColors.grey8,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: AppColors.grey40,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 7),
-          if (title == 'Date')
-            DateField(
-              controller: controller,
-              onTap: onTap,
-            )
-          else if (title == 'Passenger' || title == 'Price/Hotel')
-            NumField(controller: controller)
-          else
-            TxtField(controller: controller),
         ],
       ),
     );

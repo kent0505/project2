@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
 import '../bloc/plan_bloc.dart';
-import '../models/plan_model.dart';
+import '../models/plan.dart';
 
 class PlanDetailPage extends StatelessWidget {
-  const PlanDetailPage({super.key, required this.planModel});
+  const PlanDetailPage({super.key, required this.plan});
 
-  final PlanModel planModel;
+  final Plan plan;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,7 @@ class PlanDetailPage extends StatelessWidget {
                 PrimaryButton(
                   title: 'Delete',
                   onPressed: () {
-                    context
-                        .read<PlanBloc>()
-                        .add(DeletePlanEvent(id: planModel.id));
+                    context.read<PlanBloc>().add(DeletePlanEvent(id: plan.id));
                     context.pop();
                   },
                 ),

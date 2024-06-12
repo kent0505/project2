@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../models/plan_model.dart';
+import '../models/plan.dart';
 import '../service/plan_service.dart';
 
 part 'plan_event.dart';
@@ -8,7 +8,7 @@ part 'plan_state.dart';
 
 class PlanBloc extends Bloc<PlanEvent, PlanState> {
   final _service = PlanService();
-  List<PlanModel> _plans = [];
+  List<Plan> _plans = [];
 
   PlanBloc() : super(PlanInitial()) {
     on<GetPlansEvent>((event, emit) async {
@@ -29,16 +29,19 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
     });
 
     on<EditPlanEvent>((event, emit) async {
-      for (PlanModel plan in _service.plans) {
+      for (Plan plan in _service.plans) {
         if (plan.id == event.plan.id) {
           plan.name = event.plan.name;
           plan.departureTime = event.plan.departureTime;
           plan.arrivalTime = event.plan.arrivalTime;
-          plan.from = event.plan.from;
-          plan.to = event.plan.to;
+          plan.fromCountry = event.plan.fromCountry;
+          plan.fromCity = event.plan.fromCity;
+          plan.toCountry = event.plan.toCountry;
+          plan.toCity = event.plan.toCity;
           plan.date = event.plan.date;
           plan.passenger = event.plan.passenger;
           plan.price = event.plan.price;
+          plan.transfer = event.plan.transfer;
         }
       }
       _plans = await _service.updatePlans();

@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
 import '../bloc/plan_bloc.dart';
-import '../models/plan_model.dart';
+import '../models/plan.dart';
 import '../widgets/plan_card.dart';
 
 class PlanPage extends StatelessWidget {
@@ -26,8 +26,8 @@ class PlanPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       children: [
                         const SizedBox(height: 8),
-                        for (PlanModel plan in state.plans) ...[
-                          PlanCard(planModel: plan),
+                        for (Plan plan in state.plans) ...[
+                          PlanCard(plan: plan),
                         ],
                         const SizedBox(height: 100),
                       ],
