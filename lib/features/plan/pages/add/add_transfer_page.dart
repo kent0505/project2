@@ -159,6 +159,9 @@ class _AddTransferPageState extends State<AddTransferPage> {
                 FieldCard(
                   controller: controller1,
                   title: 'Date',
+                  onTap: () {
+                    showDatePicker(controller1);
+                  },
                 ),
                 const SizedBox(height: 19),
                 FieldCard(
