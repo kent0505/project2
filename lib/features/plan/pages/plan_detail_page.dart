@@ -63,7 +63,7 @@ class PlanDetailPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   _TransferDataCard(
                     title: 'Passenger',
-                    data: plan.passenger.toString(),
+                    data: plan.transfer.passenger.toString(),
                   ),
                   const SizedBox(height: 16),
                   _TransferTimeCard(

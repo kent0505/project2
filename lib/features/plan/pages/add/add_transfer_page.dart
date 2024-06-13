@@ -34,7 +34,9 @@ class _AddTransferPageState extends State<AddTransferPage> {
 
   void onChanged(String text) {
     setState(() {
-      if (controller5.text.isEmpty) {
+      if (controller4.text.isEmpty) {
+        active = false;
+      } else if (controller5.text.isEmpty) {
         active = false;
       } else {
         active = true;
@@ -113,7 +115,7 @@ class _AddTransferPageState extends State<AddTransferPage> {
           date: controller1.text,
           timeFrom: controller2.text,
           timeTo: controller3.text,
-          // passenger: int.parse(controller4.text),
+          passenger: int.parse(controller4.text),
           price: int.parse(controller5.text),
         ),
       ),
@@ -163,12 +165,12 @@ class _AddTransferPageState extends State<AddTransferPage> {
                   },
                 ),
                 const SizedBox(height: 19),
-                // FieldCard(
-                //   controller: controller4,
-                //   title: 'Passenger',
-                //   onChanged: onChanged,
-                // ),
-                // const SizedBox(height: 19),
+                FieldCard(
+                  controller: controller4,
+                  title: 'Passenger',
+                  onChanged: onChanged,
+                ),
+                const SizedBox(height: 19),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

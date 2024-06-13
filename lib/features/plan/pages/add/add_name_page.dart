@@ -56,7 +56,7 @@ class _AddNamePageState extends State<AddNamePage> {
             date: '',
             timeFrom: '',
             timeTo: '',
-            // passenger: 0,
+            passenger: 0,
             price: 0,
           ),
         ),
