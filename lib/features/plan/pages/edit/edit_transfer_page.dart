@@ -34,9 +34,7 @@ class _EditTransferPageState extends State<EditTransferPage> {
 
   void onChanged(String text) {
     setState(() {
-      if (controller4.text.isEmpty) {
-        active = false;
-      } else if (controller5.text.isEmpty) {
+      if (controller5.text.isEmpty) {
         active = false;
       } else {
         active = true;
