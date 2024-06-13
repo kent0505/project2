@@ -93,7 +93,7 @@ DateTime parseTimeString(String timeString) {
 
 String formatDateForCard(String date) {
   try {
-    DateFormat inputFormat = DateFormat('dd.MM.yyyy');
+    DateFormat inputFormat = DateFormat('dd/MM/yyyy');
     DateTime dateTime = inputFormat.parse(date);
     DateFormat outputFormat = DateFormat('EEEE, dd MMMM yyyy');
     String formattedDate = outputFormat.format(dateTime);
