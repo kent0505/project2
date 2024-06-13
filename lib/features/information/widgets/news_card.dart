@@ -31,13 +31,6 @@ class NewsCard extends StatelessWidget {
               height: 100,
               width: 100,
               fit: BoxFit.fitHeight,
-              errorWidget: (context, url, error) {
-                return const SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Text('Error'),
-                );
-              },
             ),
           ),
           const SizedBox(width: 24),

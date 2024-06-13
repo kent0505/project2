@@ -119,7 +119,7 @@ class PlanCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 4),
                 Text(
-                  '${formatDateForCard(plan.transfer.date)} | ${plan.passenger} Seat',
+                  '${formatDateForCard(plan.transfer.date)} | ${plan.transfer.passenger} Seat',
                   style: const TextStyle(
                     color: AppColors.white,
                     fontSize: 16,
@@ -298,11 +298,13 @@ class _BlackCard extends StatelessWidget {
                         width: 155,
                         child: Stack(
                           children: [
-                            const Text(
-                              '- — — — — — — — — — -',
+                            Text(
+                              MediaQuery.of(context).size.width > 420
+                                  ? '- — — — — — — — -'
+                                  : '- — — — — — — — — — -',
                               maxLines: 1,
                               overflow: TextOverflow.fade,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.purple,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
