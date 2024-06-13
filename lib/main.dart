@@ -12,7 +12,7 @@ import 'features/plan/models/transfer.dart';
 
 void main() async {
   await Hive.initFlutter();
-  // await Hive.deleteBoxFromDisk('travelbox');
+  await Hive.deleteBoxFromDisk('travelbox');
   Hive.registerAdapter(PlanAdapter());
   Hive.registerAdapter(TransferAdapter());
   SystemChrome.setPreferredOrientations([

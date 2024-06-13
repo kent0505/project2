@@ -11,8 +11,8 @@ class Transfer extends HiveObject {
   @HiveField(2)
   String timeTo;
 
-  @HiveField(3)
-  int passenger;
+  // @HiveField(3)
+  // int passenger;
 
   @HiveField(4)
   int price;
@@ -21,7 +21,7 @@ class Transfer extends HiveObject {
     required this.date,
     required this.timeFrom,
     required this.timeTo,
-    required this.passenger,
+    // required this.passenger,
     required this.price,
   });
 }
@@ -36,7 +36,7 @@ class TransferAdapter extends TypeAdapter<Transfer> {
       date: reader.read(),
       timeFrom: reader.read(),
       timeTo: reader.read(),
-      passenger: reader.read(),
+      // passenger: reader.read(),
       price: reader.read(),
     );
   }
@@ -46,7 +46,7 @@ class TransferAdapter extends TypeAdapter<Transfer> {
     writer.write(obj.date);
     writer.write(obj.timeFrom);
     writer.write(obj.timeTo);
-    writer.write(obj.passenger);
+    // writer.write(obj.passenger);
     writer.write(obj.price);
   }
 }

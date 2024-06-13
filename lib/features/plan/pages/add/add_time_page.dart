@@ -66,7 +66,7 @@ class _AddTimePageState extends State<AddTimePage> {
           date: widget.plan.transfer.date,
           timeFrom: widget.plan.transfer.timeFrom,
           timeTo: widget.plan.transfer.timeTo,
-          passenger: widget.plan.transfer.passenger,
+          // passenger: widget.plan.transfer.passenger,
           price: widget.plan.transfer.price,
         ),
       ),

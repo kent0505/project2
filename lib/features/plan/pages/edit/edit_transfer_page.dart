@@ -115,7 +115,7 @@ class _EditTransferPageState extends State<EditTransferPage> {
           date: controller1.text,
           timeFrom: controller2.text,
           timeTo: controller3.text,
-          passenger: int.parse(controller4.text),
+          // passenger: int.parse(controller4.text),
           price: int.parse(controller5.text),
         ),
       ),
@@ -133,7 +133,7 @@ class _EditTransferPageState extends State<EditTransferPage> {
       controller1.text = widget.plan.transfer.date;
       controller2.text = widget.plan.transfer.timeFrom;
       controller3.text = widget.plan.transfer.timeTo;
-      controller4.text = widget.plan.transfer.passenger.toString();
+      // controller4.text = widget.plan.transfer.passenger.toString();
       controller5.text = widget.plan.transfer.price.toString();
       active = true;
     }
@@ -174,12 +174,12 @@ class _EditTransferPageState extends State<EditTransferPage> {
                   },
                 ),
                 const SizedBox(height: 19),
-                FieldCard(
-                  controller: controller4,
-                  title: 'Passenger',
-                  onChanged: onChanged,
-                ),
-                const SizedBox(height: 19),
+                // FieldCard(
+                //   controller: controller4,
+                //   title: 'Passenger',
+                //   onChanged: onChanged,
+                // ),
+                // const SizedBox(height: 19),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

@@ -21,7 +21,6 @@ class _SplashPageState extends State<SplashPage> {
             context.go('/onboard');
           } else {
             context.go('/home');
-            // context.go('/onboarding');
           }
         });
       },

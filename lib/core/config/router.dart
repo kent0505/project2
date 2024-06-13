@@ -17,7 +17,7 @@ import '../../features/splash/onboard_page.dart';
 import '../../features/splash/splash_page.dart';
 
 final routerConfig = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',

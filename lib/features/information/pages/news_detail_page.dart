@@ -21,7 +21,7 @@ class NewsDetailPage extends StatelessWidget {
       body: Column(
         children: [
           CustomAppBar(
-            title: 'Aaa',
+            title: 'News',
             onPressed: () {
               context.pop();
             },
@@ -33,7 +33,10 @@ class NewsDetailPage extends StatelessWidget {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    DashPlane(),
+                    DashPlane(
+                      dash: '- — — — — — — — — -',
+                      right: 84,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 4),

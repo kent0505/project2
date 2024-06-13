@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:travel_test/core/utils.dart';
 
 import '../../core/config/app_colors.dart';
 import '../../core/widgets/buttons/primary_button.dart';
@@ -59,8 +60,10 @@ class _OnboardPageState extends State<OnboardPage> {
                   'See and read different\ninformation about\ninteresting places.',
                   image: '3.png',
                   last: true,
-                  onPressed: () {
-                    context.go('/home');
+                  onPressed: () async {
+                    await saveBool('onboarding', false).then((_) {
+                      context.go('/home');
+                    });
                   },
                 ),
               ],
